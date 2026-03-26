@@ -1,14 +1,14 @@
 /**
  * =====================================================
- * MAIN CLASS - UseCase3TrainConsistMgmt
+ * MAIN CLASS - UseCase4TrainConsistMgmt
  * =====================================================
- * Use Case 3: Track Unique Bogie IDs
+ * Use Case 4: Maintain Ordered Bogie Consist
  *
  * Description:
- * Uses HashSet to prevent duplicate bogie IDs.
+ * Uses LinkedList to maintain order and allow insertions.
  *
  * Author: Veeranjaneya Reddy
- * Version: 3.0
+ * Version: 4.0
  */
 
 import java.util.*;
@@ -18,23 +18,33 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("=====================================");
-        System.out.println("UC3 - Track Unique Bogie IDs");
+        System.out.println("UC4 - Maintain Ordered Bogie Consist");
         System.out.println("=====================================\n");
 
-        // Create HashSet
-        Set<String> bogies = new HashSet<>();
+        // Create LinkedList
+        LinkedList<String> trainConsist = new LinkedList<>();
 
-        // Add bogies (including duplicates)
-        bogies.add("BG101");
-        bogies.add("BG102");
-        bogies.add("BG103");
-        bogies.add("BG104");
+        // Add bogies
+        trainConsist.add("Engine");
+        trainConsist.add("Sleeper");
+        trainConsist.add("AC");
+        trainConsist.add("Cargo");
+        trainConsist.add("Guard");
 
-        bogies.add("BG101"); // duplicate
-        bogies.add("BG102"); // duplicate
+        System.out.println("Initial Train Consist:");
+        System.out.println(trainConsist);
 
-        // Display result
-        System.out.println("Unique Bogie IDs:");
-        System.out.println(bogies);
+        // Insert Pantry at position 2
+        trainConsist.add(2, "Pantry");
+
+        System.out.println("\nAfter Adding Pantry at index 2:");
+        System.out.println(trainConsist);
+
+        // Remove first and last
+        trainConsist.removeFirst();
+        trainConsist.removeLast();
+
+        System.out.println("\nAfter Removing First and Last:");
+        System.out.println(trainConsist);
     }
 }
