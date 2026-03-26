@@ -1,14 +1,14 @@
 /**
  * =====================================================
- * MAIN CLASS - UseCase1TrainConsistMgmt
+ * MAIN CLASS - UseCase2TrainConsistMgmt
  * =====================================================
- * Use Case 1: Initialize Train and Display Consist Summary
+ * Use Case 2: Add Passenger Bogies to Train
  *
  * Description:
- * Initializes an empty train consist and displays initial details.
+ * Demonstrates ArrayList CRUD operations.
  *
  * Author: Veeranjaneya Reddy
- * Version: 1.0
+ * Version: 2.0
  */
 
 import java.util.*;
@@ -18,16 +18,32 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("=====================================");
-        System.out.println("=== Train Consist Management App ===");
+        System.out.println("UC2 - Add Passenger Bogies to Train");
         System.out.println("=====================================\n");
 
-        // Create empty train consist
-        List<String> trainConsist = new ArrayList<>();
+        // Create ArrayList
+        List<String> passengerBogies = new ArrayList<>();
 
-        // Display initial bogie count
-        System.out.println("Initial Bogie Count: " + trainConsist.size());
+        // ADD bogies
+        passengerBogies.add("Sleeper");
+        passengerBogies.add("AC Chair");
+        passengerBogies.add("First Class");
 
-        // Display train consist
-        System.out.println("Train Consist: " + trainConsist);
+        System.out.println("After Adding Bogies:");
+        System.out.println(passengerBogies);
+
+        // REMOVE bogie
+        passengerBogies.remove("AC Chair");
+
+        System.out.println("\nAfter Removing 'AC Chair':");
+        System.out.println(passengerBogies);
+
+        // CHECK existence
+        System.out.println("\nChecking if 'Sleeper' exists:");
+        System.out.println("Contains Sleeper? " + passengerBogies.contains("Sleeper"));
+
+        // FINAL LIST
+        System.out.println("\nFinal Train Passenger Consist:");
+        System.out.println(passengerBogies);
     }
 }
