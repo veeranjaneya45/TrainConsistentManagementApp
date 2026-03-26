@@ -1,14 +1,14 @@
 /**
  * =====================================================
- * MAIN CLASS - UseCase2TrainConsistMgmt
+ * MAIN CLASS - UseCase3TrainConsistMgmt
  * =====================================================
- * Use Case 2: Add Passenger Bogies to Train
+ * Use Case 3: Track Unique Bogie IDs
  *
  * Description:
- * Demonstrates ArrayList CRUD operations.
+ * Uses HashSet to prevent duplicate bogie IDs.
  *
  * Author: Veeranjaneya Reddy
- * Version: 2.0
+ * Version: 3.0
  */
 
 import java.util.*;
@@ -18,32 +18,23 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("=====================================");
-        System.out.println("UC2 - Add Passenger Bogies to Train");
+        System.out.println("UC3 - Track Unique Bogie IDs");
         System.out.println("=====================================\n");
 
-        // Create ArrayList
-        List<String> passengerBogies = new ArrayList<>();
+        // Create HashSet
+        Set<String> bogies = new HashSet<>();
 
-        // ADD bogies
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
+        // Add bogies (including duplicates)
+        bogies.add("BG101");
+        bogies.add("BG102");
+        bogies.add("BG103");
+        bogies.add("BG104");
 
-        System.out.println("After Adding Bogies:");
-        System.out.println(passengerBogies);
+        bogies.add("BG101"); // duplicate
+        bogies.add("BG102"); // duplicate
 
-        // REMOVE bogie
-        passengerBogies.remove("AC Chair");
-
-        System.out.println("\nAfter Removing 'AC Chair':");
-        System.out.println(passengerBogies);
-
-        // CHECK existence
-        System.out.println("\nChecking if 'Sleeper' exists:");
-        System.out.println("Contains Sleeper? " + passengerBogies.contains("Sleeper"));
-
-        // FINAL LIST
-        System.out.println("\nFinal Train Passenger Consist:");
-        System.out.println(passengerBogies);
+        // Display result
+        System.out.println("Unique Bogie IDs:");
+        System.out.println(bogies);
     }
 }
