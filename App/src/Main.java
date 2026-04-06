@@ -1,5 +1,5 @@
 /**
- * UC9: Group Bogies by Type
+ * UC10: Total Seat Count using reduce
  * Author: Veeranjaneya Reddy
  */
 
@@ -23,18 +23,13 @@ public class Main {
         List<Bogie> bogies = Arrays.asList(
                 new Bogie("Sleeper", 72),
                 new Bogie("AC Chair", 56),
-                new Bogie("First Class", 24),
-                new Bogie("Sleeper", 70)
+                new Bogie("First Class", 24)
         );
 
-        Map<String, List<Bogie>> grouped =
-                bogies.stream().collect(Collectors.groupingBy(b -> b.name));
+        int total = bogies.stream()
+                .map(b -> b.capacity)
+                .reduce(0, Integer::sum);
 
-        for (String key : grouped.keySet()) {
-            System.out.println(key + ":");
-            for (Bogie b : grouped.get(key)) {
-                System.out.println("  " + b.capacity);
-            }
-        }
+        System.out.println("Total Seats = " + total);
     }
 }
