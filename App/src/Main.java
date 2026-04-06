@@ -1,35 +1,24 @@
 /**
- * UC10: Total Seat Count using reduce
+ * UC11: Regex Validation
  * Author: Veeranjaneya Reddy
  */
 
-import java.util.*;
-import java.util.stream.*;
+import java.util.regex.*;
 
 public class Main {
 
-    static class Bogie {
-        String name;
-        int capacity;
-
-        Bogie(String name, int capacity) {
-            this.name = name;
-            this.capacity = capacity;
-        }
-    }
-
     public static void main(String[] args) {
 
-        List<Bogie> bogies = Arrays.asList(
-                new Bogie("Sleeper", 72),
-                new Bogie("AC Chair", 56),
-                new Bogie("First Class", 24)
-        );
+        String trainId = "TRN-1234";
+        String cargoCode = "PET-AB";
 
-        int total = bogies.stream()
-                .map(b -> b.capacity)
-                .reduce(0, Integer::sum);
+        Pattern trainPattern = Pattern.compile("TRN-\\d{4}");
+        Pattern cargoPattern = Pattern.compile("PET-[A-Z]{2}");
 
-        System.out.println("Total Seats = " + total);
+        boolean trainValid = trainPattern.matcher(trainId).matches();
+        boolean cargoValid = cargoPattern.matcher(cargoCode).matches();
+
+        System.out.println("Train ID Valid: " + trainValid);
+        System.out.println("Cargo Code Valid: " + cargoValid);
     }
 }
