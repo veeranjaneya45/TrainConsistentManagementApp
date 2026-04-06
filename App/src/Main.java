@@ -1,24 +1,34 @@
 /**
- * UC11: Regex Validation
+ * UC12: Safety Compliance Check
  * Author: Veeranjaneya Reddy
  */
 
-import java.util.regex.*;
+import java.util.*;
+import java.util.stream.*;
 
 public class Main {
 
+    static class GoodsBogie {
+        String type;
+        String cargo;
+
+        GoodsBogie(String type, String cargo) {
+            this.type = type;
+            this.cargo = cargo;
+        }
+    }
+
     public static void main(String[] args) {
 
-        String trainId = "TRN-1234";
-        String cargoCode = "PET-AB";
+        List<GoodsBogie> list = Arrays.asList(
+                new GoodsBogie("Cylindrical", "Petroleum"),
+                new GoodsBogie("Box", "Coal")
+        );
 
-        Pattern trainPattern = Pattern.compile("TRN-\\d{4}");
-        Pattern cargoPattern = Pattern.compile("PET-[A-Z]{2}");
+        boolean safe = list.stream().allMatch(b ->
+                b.type.equals("Cylindrical") ? b.cargo.equals("Petroleum") : true
+        );
 
-        boolean trainValid = trainPattern.matcher(trainId).matches();
-        boolean cargoValid = cargoPattern.matcher(cargoCode).matches();
-
-        System.out.println("Train ID Valid: " + trainValid);
-        System.out.println("Cargo Code Valid: " + cargoValid);
+        System.out.println("Train Safety: " + (safe ? "SAFE" : "UNSAFE"));
     }
 }
