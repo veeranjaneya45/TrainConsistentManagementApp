@@ -1,4 +1,5 @@
 /**
+ * UC9: Group Bogies by Type
  * UC8: Filter Bogies using Streams
  * =====================================================
  * MAIN CLASS - UseCase4TrainConsistMgmt
@@ -32,15 +33,18 @@ public class Main {
         List<Bogie> bogies = Arrays.asList(
                 new Bogie("Sleeper", 72),
                 new Bogie("AC Chair", 56),
-                new Bogie("First Class", 24)
+                new Bogie("First Class", 24),
+                new Bogie("Sleeper", 70)
         );
 
-        List<Bogie> result = bogies.stream()
-                .filter(b -> b.capacity > 50)
-                .collect(Collectors.toList());
+        Map<String, List<Bogie>> grouped =
+                bogies.stream().collect(Collectors.groupingBy(b -> b.name));
 
-        for (Bogie b : result) {
-            System.out.println(b.name + " -> " + b.capacity);
+        for (String key : grouped.keySet()) {
+            System.out.println(key + ":");
+            for (Bogie b : grouped.get(key)) {
+                System.out.println("  " + b.capacity);
+            }
         }
         System.out.println("=====================================");
         System.out.println("UC4 - Maintain Ordered Bogie Consist");
