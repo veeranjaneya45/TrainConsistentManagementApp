@@ -1,4 +1,5 @@
 /**
+ * UC8: Filter Bogies using Streams
  * =====================================================
  * MAIN CLASS - UseCase4TrainConsistMgmt
  * =====================================================
@@ -12,6 +13,7 @@
  */
 
 import java.util.*;
+import java.util.stream.*;
 
 public class Main {
 
@@ -27,14 +29,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        List<Bogie> bogies = new ArrayList<>();
-        bogies.add(new Bogie("Sleeper", 72));
-        bogies.add(new Bogie("AC Chair", 56));
-        bogies.add(new Bogie("First Class", 24));
+        List<Bogie> bogies = Arrays.asList(
+                new Bogie("Sleeper", 72),
+                new Bogie("AC Chair", 56),
+                new Bogie("First Class", 24)
+        );
 
-        bogies.sort(Comparator.comparingInt(b -> b.capacity));
+        List<Bogie> result = bogies.stream()
+                .filter(b -> b.capacity > 50)
+                .collect(Collectors.toList());
 
-        for (Bogie b : bogies) {
+        for (Bogie b : result) {
             System.out.println(b.name + " -> " + b.capacity);
         }
         System.out.println("=====================================");
