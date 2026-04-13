@@ -1,11 +1,18 @@
-import java.util.*;
-import java.util.stream.*;
+class InvalidCapacityException extends Exception {
+    InvalidCapacityException(String msg) {
+        super(msg);
+    }
+}
 
-class UC13 {
-    static class Bogie {
-        String type;
-        int capacity;
+class Bogie {
+    String type;
+    int capacity;
 
+    Bogie(String type, int capacity) throws InvalidCapacityException {
+        if (capacity <= 0)
+            throw new InvalidCapacityException("Capacity must be > 0");
+        this.type = type;
+        this.capacity = capacity;
         Bogie(String type, int capacity) {
             this.type = type;
             this.capacity = capacity;
@@ -41,13 +48,15 @@ public class Main {
             this.cargo = cargo;
         }
     }
+}
 
+public class Main {
     public static void main(String[] args) {
-        List<Bogie> list = new ArrayList<>();
-
-        // Create dataset
-        for (int i = 0; i < 100000; i++) {
-            list.add(new Bogie("Sleeper", i % 100));
+        try {
+            Bogie b1 = new Bogie("AC", 50);
+            Bogie b2 = new Bogie("Sleeper", -10); // Exception
+        } catch (InvalidCapacityException e) {
+            System.out.println(e.getMessage());
         }
 
         // Loop
