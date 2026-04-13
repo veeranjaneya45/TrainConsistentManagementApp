@@ -1,40 +1,28 @@
-import java.util.*;
-import java.util.stream.*;
-
-class UC13 {
-    static class Bogie {
-        String type;
-        int capacity;
-
-        Bogie(String type, int capacity) {
-            this.type = type;
-            this.capacity = capacity;
-        }
+class InvalidCapacityException extends Exception {
+    InvalidCapacityException(String msg) {
+        super(msg);
     }
+}
 
+class Bogie {
+    String type;
+    int capacity;
+
+    Bogie(String type, int capacity) throws InvalidCapacityException {
+        if (capacity <= 0)
+            throw new InvalidCapacityException("Capacity must be > 0");
+        this.type = type;
+        this.capacity = capacity;
+    }
+}
+
+public class Main {
     public static void main(String[] args) {
-        List<Bogie> list = new ArrayList<>();
-
-        // Create dataset
-        for (int i = 0; i < 100000; i++) {
-            list.add(new Bogie("Sleeper", i % 100));
+        try {
+            Bogie b1 = new Bogie("AC", 50);
+            Bogie b2 = new Bogie("Sleeper", -10); // Exception
+        } catch (InvalidCapacityException e) {
+            System.out.println(e.getMessage());
         }
-
-        // Loop
-        long start = System.nanoTime();
-        List<Bogie> result1 = new ArrayList<>();
-        for (Bogie b : list) {
-            if (b.capacity > 60) result1.add(b);
-        }
-        long end = System.nanoTime();
-        System.out.println("Loop Time: " + (end - start));
-
-        // Stream
-        start = System.nanoTime();
-        List<Bogie> result2 = list.stream()
-                .filter(b -> b.capacity > 60)
-                .collect(Collectors.toList());
-        end = System.nanoTime();
-        System.out.println("Stream Time: " + (end - start));
     }
 }
